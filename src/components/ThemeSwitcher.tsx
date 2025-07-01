@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Settings } from 'lucide-react';
+import { Cog } from 'lucide-react';
 import { useTheme, ColorTheme } from '@/contexts/ThemeContext';
 
 const themes = [
@@ -20,6 +20,11 @@ const themes = [
 const ThemeSwitcher: React.FC = () => {
   const { currentTheme, setTheme } = useTheme();
 
+  const handleThemeChange = (themeId: ColorTheme) => {
+    console.log(`Theme switcher: changing to ${themeId}`);
+    setTheme(themeId);
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -28,7 +33,7 @@ const ThemeSwitcher: React.FC = () => {
           size="icon"
           className="fixed top-4 right-4 z-50 bg-white/90 backdrop-blur-sm border-2 hover:bg-white/95 shadow-lg"
         >
-          <Settings className="h-5 w-5" />
+          <Cog className="h-5 w-5" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent 
@@ -41,7 +46,7 @@ const ThemeSwitcher: React.FC = () => {
         {themes.map((theme) => (
           <DropdownMenuItem
             key={theme.id}
-            onClick={() => setTheme(theme.id)}
+            onClick={() => handleThemeChange(theme.id)}
             className={`flex items-center gap-3 cursor-pointer px-3 py-2 ${
               currentTheme === theme.id 
                 ? 'bg-primary/10 text-primary font-semibold' 

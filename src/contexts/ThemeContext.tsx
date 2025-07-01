@@ -77,30 +77,35 @@ const themeColors = {
   },
 };
 
+const applyThemeToDocument = (theme: ColorTheme) => {
+  const root = document.documentElement;
+  const colors = themeColors[theme];
+  
+  // Apply the theme colors to CSS variables
+  Object.entries(colors).forEach(([property, value]) => {
+    root.style.setProperty(property, value);
+  });
+  
+  console.log(`Applied ${theme} theme with colors:`, colors);
+};
+
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentTheme, setCurrentTheme] = useState<ColorTheme>('pink');
 
   const setTheme = (theme: ColorTheme) => {
+    console.log(`Switching to ${theme} theme`);
     setCurrentTheme(theme);
-    
-    // Apply the theme colors to CSS variables
-    const root = document.documentElement;
-    const colors = themeColors[theme];
-    
-    Object.entries(colors).forEach(([property, value]) => {
-      root.style.setProperty(property, value);
-    });
-    
-    // Store theme preference
+    applyThemeToDocument(theme);
     localStorage.setItem('color-theme', theme);
   };
 
   useEffect(() => {
-    // Load saved theme on mount
+    // Load saved theme on mount or default to pink
     const savedTheme = localStorage.getItem('color-theme') as ColorTheme;
-    if (savedTheme && themeColors[savedTheme]) {
-      setTheme(savedTheme);
-    }
+    const initialTheme = savedTheme && themeColors[savedTheme] ? savedTheme : 'pink';
+    
+    setCurrentTheme(initialTheme);
+    applyThemeToDocument(initialTheme);
   }, []);
 
   return (
