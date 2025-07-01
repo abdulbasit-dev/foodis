@@ -52,52 +52,52 @@ const FilterBar: React.FC<FilterBarProps> = ({
   onPrepTimeChange
 }) => {
   return (
-    <div className="space-y-6 mb-8">
+    <div className="space-y-8 mb-10">
       {/* Search Bar */}
       <div className="relative max-w-md mx-auto">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-pink-400 h-5 w-5" />
         <Input
           type="text"
           placeholder="Search recipes or ingredients..."
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="pl-10 bg-white/80 backdrop-blur-sm border-orange-200 focus:border-orange-400 focus:ring-orange-400"
+          className="pl-12 h-12 bg-white/90 backdrop-blur-sm border-2 border-pink-200 focus:border-pink-400 focus:ring-pink-400 rounded-full text-lg shadow-lg"
         />
       </div>
 
       {/* Category Filters */}
-      <div className="flex flex-wrap gap-2 justify-center">
+      <div className="flex flex-wrap gap-3 justify-center">
         {categories.map((category) => (
           <Button
             key={category.id}
             variant={selectedCategory === category.id ? "default" : "outline"}
-            size="sm"
+            size="lg"
             onClick={() => onCategoryChange(category.id)}
-            className={`transition-all duration-200 ${
+            className={`transition-all duration-300 transform hover:scale-105 ${
               selectedCategory === category.id
-                ? 'recipe-gradient text-white shadow-lg'
-                : 'bg-white/80 hover:bg-white hover:shadow-md border-orange-200'
+                ? 'lovable-button text-white font-semibold'
+                : 'lovable-outline font-medium'
             }`}
           >
-            <span className="mr-2">{category.emoji}</span>
+            <span className="mr-2 text-lg">{category.emoji}</span>
             {category.label}
           </Button>
         ))}
       </div>
 
       {/* Additional Filters */}
-      <div className="flex flex-wrap gap-4 justify-center">
+      <div className="flex flex-wrap gap-6 justify-center">
         {/* Difficulty Filter */}
-        <div className="flex flex-wrap gap-1">
-          <span className="text-sm font-medium text-gray-600 self-center mr-2">Difficulty:</span>
+        <div className="flex flex-wrap gap-2 items-center">
+          <span className="text-sm font-semibold text-pink-600 mr-3">Difficulty:</span>
           {difficulties.map((difficulty) => (
             <Badge
               key={difficulty.id}
               variant={selectedDifficulty === difficulty.id ? "default" : "outline"}
-              className={`cursor-pointer transition-all duration-200 ${
+              className={`cursor-pointer transition-all duration-300 transform hover:scale-105 px-4 py-2 text-sm font-medium ${
                 selectedDifficulty === difficulty.id
-                  ? 'bg-orange-500 hover:bg-orange-600'
-                  : 'hover:bg-orange-50'
+                  ? 'lovable-button text-white border-0'
+                  : 'bg-white/80 border-2 border-pink-300 text-pink-600 hover:bg-pink-50'
               }`}
               onClick={() => onDifficultyChange(difficulty.id)}
             >
@@ -107,16 +107,16 @@ const FilterBar: React.FC<FilterBarProps> = ({
         </div>
 
         {/* Prep Time Filter */}
-        <div className="flex flex-wrap gap-1">
-          <span className="text-sm font-medium text-gray-600 self-center mr-2">Prep Time:</span>
+        <div className="flex flex-wrap gap-2 items-center">
+          <span className="text-sm font-semibold text-pink-600 mr-3">Prep Time:</span>
           {prepTimes.map((time) => (
             <Badge
               key={time.id}
               variant={selectedPrepTime === time.id ? "default" : "outline"}
-              className={`cursor-pointer transition-all duration-200 ${
+              className={`cursor-pointer transition-all duration-300 transform hover:scale-105 px-4 py-2 text-sm font-medium ${
                 selectedPrepTime === time.id
-                  ? 'bg-orange-500 hover:bg-orange-600'
-                  : 'hover:bg-orange-50'
+                  ? 'lovable-button text-white border-0'
+                  : 'bg-white/80 border-2 border-pink-300 text-pink-600 hover:bg-pink-50'
               }`}
               onClick={() => onPrepTimeChange(time.id)}
             >

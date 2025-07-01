@@ -18,24 +18,24 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 25 95% 53%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 340 82% 52%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 30 100% 96%;
-    --secondary-foreground: 25 95% 53%;
+    --secondary: 320 100% 95%;
+    --secondary-foreground: 340 82% 52%;
 
-    --muted: 30 100% 96%;
+    --muted: 320 100% 96%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 35 100% 94%;
-    --accent-foreground: 25 95% 53%;
+    --accent: 310 100% 93%;
+    --accent-foreground: 340 82% 52%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 25 95% 53%;
+    --border: 314 31.8% 91.4%;
+    --input: 314 31.8% 91.4%;
+    --ring: 340 82% 52%;
 
     --radius: 0.75rem;
 
@@ -48,42 +48,42 @@ All colors MUST be HSL.
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    /* Custom recipe app colors */
-    --recipe-warm: 25 95% 53%;
-    --recipe-warm-light: 30 100% 96%;
-    --recipe-brown: 30 25% 25%;
-    --recipe-cream: 45 100% 98%;
+    /* Custom recipe colors - Updated to more lovable palette */
+    --recipe-warm: 340 82% 52%;
+    --recipe-warm-light: 320 100% 95%;
+    --recipe-brown: 25 30% 25%;
+    --recipe-cream: 320 100% 98%;
     --recipe-shadow: 0 0% 0%;
   }
 
   .dark {
     --background: 20 14.3% 4.1%;
-    --foreground: 30 100% 96%;
+    --foreground: 320 100% 96%;
 
     --card: 20 14.3% 4.1%;
-    --card-foreground: 30 100% 96%;
+    --card-foreground: 320 100% 96%;
 
     --popover: 20 14.3% 4.1%;
-    --popover-foreground: 30 100% 96%;
+    --popover-foreground: 320 100% 96%;
 
-    --primary: 25 95% 53%;
-    --primary-foreground: 20 14.3% 4.1%;
+    --primary: 340 82% 52%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 30 15% 15%;
-    --secondary-foreground: 30 100% 96%;
+    --secondary: 330 15% 15%;
+    --secondary-foreground: 320 100% 96%;
 
-    --muted: 30 15% 15%;
+    --muted: 330 15% 15%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 30 15% 15%;
-    --accent-foreground: 30 100% 96%;
+    --accent: 330 15% 15%;
+    --accent-foreground: 320 100% 96%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 30 15% 15%;
-    --input: 30 15% 15%;
-    --ring: 25 95% 53%;
+    --border: 330 15% 15%;
+    --input: 330 15% 15%;
+    --ring: 340 82% 52%;
 
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -102,14 +102,14 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-gradient-to-br from-recipe-cream to-recipe-warm-light text-foreground;
+    @apply bg-gradient-to-br from-recipe-cream via-recipe-warm-light to-pink-50 text-foreground;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 }
 
 @layer utilities {
   .recipe-gradient {
-    background: linear-gradient(135deg, hsl(var(--recipe-warm)) 0%, hsl(var(--recipe-brown)) 100%);
+    background: linear-gradient(135deg, hsl(340 82% 52%) 0%, hsl(320 70% 45%) 50%, hsl(300 60% 40%) 100%);
   }
   
   .recipe-card-shadow {
@@ -118,5 +118,30 @@ All colors MUST be HSL.
   
   .recipe-card-shadow-hover {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  .lovable-button {
+    background: linear-gradient(135deg, hsl(340 82% 52%) 0%, hsl(320 70% 45%) 50%, hsl(300 60% 40%) 100%);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(219, 39, 119, 0.3);
+  }
+
+  .lovable-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(219, 39, 119, 0.4);
+  }
+
+  .lovable-outline {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid hsl(340 82% 52%);
+    color: hsl(340 82% 52%);
+    transition: all 0.3s ease;
+  }
+
+  .lovable-outline:hover {
+    background: hsl(340 82% 52%);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(219, 39, 119, 0.25);
   }
 }
