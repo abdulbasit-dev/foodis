@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,14 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Custom recipe colors
+				recipe: {
+					warm: 'hsl(var(--recipe-warm))',
+					'warm-light': 'hsl(var(--recipe-warm-light))',
+					brown: 'hsl(var(--recipe-brown))',
+					cream: 'hsl(var(--recipe-cream))',
+					shadow: 'hsl(var(--recipe-shadow))'
 				}
 			},
 			borderRadius: {
