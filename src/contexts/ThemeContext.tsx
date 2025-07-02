@@ -1,11 +1,13 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-export type ColorTheme = 'pink' | 'green' | 'blue' | 'purple';
+export type ColorTheme = 'orange' | 'pink' | 'green' | 'blue' | 'purple' | 'teal' | 'amber';
 
 interface ThemeContextType {
   currentTheme: ColorTheme;
   setTheme: (theme: ColorTheme) => void;
+  isGlassy: boolean;
+  setGlassy: (glassy: boolean) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -19,6 +21,20 @@ export const useTheme = () => {
 };
 
 const themeColors = {
+  orange: {
+    '--primary': '20 90% 48%',
+    '--primary-foreground': '0 0% 100%',
+    '--secondary': '25 100% 95%',
+    '--secondary-foreground': '20 90% 48%',
+    '--muted': '25 100% 96%',
+    '--accent': '25 100% 93%',
+    '--accent-foreground': '20 90% 48%',
+    '--border': '25 31.8% 91.4%',
+    '--input': '25 31.8% 91.4%',
+    '--ring': '20 90% 48%',
+    '--recipe-warm': '20 90% 48%',
+    '--recipe-warm-light': '25 100% 95%',
+  },
   pink: {
     '--primary': '340 82% 52%',
     '--primary-foreground': '0 0% 100%',
@@ -75,6 +91,34 @@ const themeColors = {
     '--recipe-warm': '262 83% 58%',
     '--recipe-warm-light': '270 100% 95%',
   },
+  teal: {
+    '--primary': '180 83% 40%',
+    '--primary-foreground': '0 0% 100%',
+    '--secondary': '180 100% 95%',
+    '--secondary-foreground': '180 83% 40%',
+    '--muted': '180 100% 96%',
+    '--accent': '180 100% 93%',
+    '--accent-foreground': '180 83% 40%',
+    '--border': '180 31.8% 91.4%',
+    '--input': '180 31.8% 91.4%',
+    '--ring': '180 83% 40%',
+    '--recipe-warm': '180 83% 40%',
+    '--recipe-warm-light': '180 100% 95%',
+  },
+  amber: {
+    '--primary': '45 93% 47%',
+    '--primary-foreground': '0 0% 100%',
+    '--secondary': '48 100% 95%',
+    '--secondary-foreground': '45 93% 47%',
+    '--muted': '48 100% 96%',
+    '--accent': '48 100% 93%',
+    '--accent-foreground': '45 93% 47%',
+    '--border': '48 31.8% 91.4%',
+    '--input': '48 31.8% 91.4%',
+    '--ring': '45 93% 47%',
+    '--recipe-warm': '45 93% 47%',
+    '--recipe-warm-light': '48 100% 95%',
+  },
 };
 
 const applyThemeToDocument = (theme: ColorTheme) => {
@@ -100,8 +144,19 @@ const applyThemeToDocument = (theme: ColorTheme) => {
   console.log(`Successfully applied ${theme} theme with enhanced method`);
 };
 
+const applyGlassyEffect = (isGlassy: boolean) => {
+  const root = document.documentElement;
+  if (isGlassy) {
+    root.setAttribute('data-glassy', 'true');
+  } else {
+    root.removeAttribute('data-glassy');
+  }
+  console.log(`Glassy theme ${isGlassy ? 'enabled' : 'disabled'}`);
+};
+
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [currentTheme, setCurrentTheme] = useState<ColorTheme>('pink');
+  const [currentTheme, setCurrentTheme] = useState<ColorTheme>('orange');
+  const [isGlassy, setIsGlassy] = useState(false);
 
   const setTheme = (theme: ColorTheme) => {
     console.log(`ThemeProvider: Switching from ${currentTheme} to ${theme} theme`);
@@ -111,19 +166,32 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     console.log(`ThemeProvider: Theme switch complete, current theme is now ${theme}`);
   };
 
+  const setGlassy = (glassy: boolean) => {
+    console.log(`ThemeProvider: Setting glassy effect to ${glassy}`);
+    setIsGlassy(glassy);
+    applyGlassyEffect(glassy);
+    localStorage.setItem('glassy-theme', glassy.toString());
+  };
+
   useEffect(() => {
     console.log('ThemeProvider: Initializing theme system...');
-    // Load saved theme on mount or default to pink
+    // Load saved theme on mount or default to orange
     const savedTheme = localStorage.getItem('color-theme') as ColorTheme;
-    const initialTheme = savedTheme && themeColors[savedTheme] ? savedTheme : 'pink';
+    const initialTheme = savedTheme && themeColors[savedTheme] ? savedTheme : 'orange';
+    
+    const savedGlassy = localStorage.getItem('glassy-theme') === 'true';
     
     console.log(`ThemeProvider: Initial theme will be ${initialTheme} (saved: ${savedTheme})`);
+    console.log(`ThemeProvider: Initial glassy will be ${savedGlassy}`);
+    
     setCurrentTheme(initialTheme);
+    setIsGlassy(savedGlassy);
     applyThemeToDocument(initialTheme);
+    applyGlassyEffect(savedGlassy);
   }, []);
 
   return (
-    <ThemeContext.Provider value={{ currentTheme, setTheme }}>
+    <ThemeContext.Provider value={{ currentTheme, setTheme, isGlassy, setGlassy }}>
       {children}
     </ThemeContext.Provider>
   );

@@ -19,19 +19,19 @@ All colors MUST be HSL.
     --popover-foreground: 222.2 84% 4.9%;
 
     /* These will be overridden by the theme system */
-    --primary: 340 82% 52%;
+    --primary: 20 90% 48%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 320 100% 95%;
-    --secondary-foreground: 340 82% 52%;
-    --muted: 320 100% 96%;
+    --secondary: 25 100% 95%;
+    --secondary-foreground: 20 90% 48%;
+    --muted: 25 100% 96%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 310 100% 93%;
-    --accent-foreground: 340 82% 52%;
-    --border: 314 31.8% 91.4%;
-    --input: 314 31.8% 91.4%;
-    --ring: 340 82% 52%;
-    --recipe-warm: 340 82% 52%;
-    --recipe-warm-light: 320 100% 95%;
+    --accent: 25 100% 93%;
+    --accent-foreground: 20 90% 48%;
+    --border: 25 31.8% 91.4%;
+    --input: 25 31.8% 91.4%;
+    --ring: 20 90% 48%;
+    --recipe-warm: 20 90% 48%;
+    --recipe-warm-light: 25 100% 95%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -49,7 +49,7 @@ All colors MUST be HSL.
 
     /* Custom recipe colors - Updated to more lovable palette */
     --recipe-brown: 25 30% 25%;
-    --recipe-cream: 320 100% 98%;
+    --recipe-cream: 25 100% 98%;
     --recipe-shadow: 0 0% 0%;
   }
 
@@ -60,32 +60,32 @@ All colors MUST be HSL.
 
   .dark {
     --background: 20 14.3% 4.1%;
-    --foreground: 320 100% 96%;
+    --foreground: 25 100% 96%;
 
     --card: 20 14.3% 4.1%;
-    --card-foreground: 320 100% 96%;
+    --card-foreground: 25 100% 96%;
 
     --popover: 20 14.3% 4.1%;
-    --popover-foreground: 320 100% 96%;
+    --popover-foreground: 25 100% 96%;
 
-    --primary: 340 82% 52%;
+    --primary: 20 90% 48%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 330 15% 15%;
-    --secondary-foreground: 320 100% 96%;
+    --secondary: 25 15% 15%;
+    --secondary-foreground: 25 100% 96%;
 
-    --muted: 330 15% 15%;
+    --muted: 25 15% 15%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 330 15% 15%;
-    --accent-foreground: 320 100% 96%;
+    --accent: 25 15% 15%;
+    --accent-foreground: 25 100% 96%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 330 15% 15%;
-    --input: 330 15% 15%;
-    --ring: 340 82% 52%;
+    --border: 25 15% 15%;
+    --input: 25 15% 15%;
+    --ring: 20 90% 48%;
 
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -104,14 +104,45 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-gradient-to-br from-recipe-cream via-recipe-warm-light to-pink-50 text-foreground;
+    @apply bg-gradient-to-br from-recipe-cream via-recipe-warm-light to-orange-50 text-foreground;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Glassy theme effects */
+  :root[data-glassy="true"] body {
+    @apply bg-gradient-to-br from-white/80 via-recipe-warm-light/60 to-primary/10;
+    backdrop-filter: blur(20px);
+  }
+
+  :root[data-glassy="true"] .glassy-card {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  :root[data-glassy="true"] .glassy-header {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  :root[data-glassy="true"] .glassy-input {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  :root[data-glassy="true"] .glassy-button {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
   }
 }
 
 @layer utilities {
   .recipe-gradient {
-    background: linear-gradient(135deg, hsl(340 82% 52%) 0%, hsl(320 70% 45%) 50%, hsl(300 60% 40%) 100%);
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary)) 50%, hsl(var(--primary)) 100%);
   }
   
   .recipe-card-shadow {
@@ -145,5 +176,22 @@ All colors MUST be HSL.
     color: white;
     transform: translateY(-1px);
     box-shadow: 0 6px 16px hsl(var(--primary) / 0.25);
+  }
+
+  /* Glassy utility classes */
+  .glassy-card {
+    transition: all 0.3s ease;
+  }
+
+  .glassy-header {
+    transition: all 0.3s ease;
+  }
+
+  .glassy-input {
+    transition: all 0.3s ease;
+  }
+
+  .glassy-button {
+    transition: all 0.3s ease;
   }
 }

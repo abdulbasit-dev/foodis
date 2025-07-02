@@ -115,11 +115,11 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-100">
       {/* Header */}
-      <div className="bg-white/80 backdrop-blur-sm border-b border-orange-200 sticky top-0 z-40">
+      <div className="bg-white/80 backdrop-blur-sm border-b border-orange-200 sticky top-0 z-40 glassy-header">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">My Recipe Collection</h1>
+              <h1 className="text-3xl font-bold text-gray-900">Foodis</h1>
               <p className="text-gray-600 mt-1">Discover, save, and track your favorite recipes</p>
             </div>
             <Button 
@@ -181,7 +181,7 @@ const Index = () => {
         )}
 
         {/* Stats */}
-        <div className="mt-12 bg-white/60 backdrop-blur-sm rounded-lg p-6 border border-orange-200">
+        <div className="mt-12 bg-white/60 backdrop-blur-sm rounded-lg p-6 border border-orange-200 glassy-card">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
             <div>
               <div className="text-2xl font-bold text-orange-600">{recipes.length}</div>

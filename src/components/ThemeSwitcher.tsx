@@ -6,26 +6,35 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
 import { Cog } from 'lucide-react';
 import { useTheme, ColorTheme } from '@/contexts/ThemeContext';
 
 const themes = [
+  { id: 'orange' as ColorTheme, name: 'Orange', color: 'bg-orange-500', emoji: '🍊' },
   { id: 'pink' as ColorTheme, name: 'Pink', color: 'bg-pink-500', emoji: '🌸' },
   { id: 'green' as ColorTheme, name: 'Green', color: 'bg-green-500', emoji: '🌿' },
   { id: 'blue' as ColorTheme, name: 'Blue', color: 'bg-blue-500', emoji: '💙' },
   { id: 'purple' as ColorTheme, name: 'Purple', color: 'bg-purple-500', emoji: '💜' },
+  { id: 'teal' as ColorTheme, name: 'Teal', color: 'bg-teal-500', emoji: '🌊' },
+  { id: 'amber' as ColorTheme, name: 'Amber', color: 'bg-amber-500', emoji: '⚡' },
 ];
 
 const ThemeSwitcher: React.FC = () => {
-  const { currentTheme, setTheme } = useTheme();
+  const { currentTheme, setTheme, isGlassy, setGlassy } = useTheme();
 
   const handleThemeChange = (themeId: ColorTheme) => {
     console.log(`ThemeSwitcher: User clicked ${themeId}, current theme: ${currentTheme}`);
     setTheme(themeId);
   };
 
-  console.log(`ThemeSwitcher: Rendering with current theme: ${currentTheme}`);
+  const handleGlassyToggle = () => {
+    console.log(`ThemeSwitcher: Toggling glassy effect, current: ${isGlassy}`);
+    setGlassy(!isGlassy);
+  };
+
+  console.log(`ThemeSwitcher: Rendering with current theme: ${currentTheme}, glassy: ${isGlassy}`);
 
   return (
     <DropdownMenu>
@@ -67,6 +76,20 @@ const ThemeSwitcher: React.FC = () => {
             )}
           </DropdownMenuItem>
         ))}
+        <DropdownMenuSeparator />
+        <DropdownMenuItem
+          onClick={handleGlassyToggle}
+          className="flex items-center gap-3 cursor-pointer px-3 py-2 transition-colors hover:bg-gray-50"
+        >
+          <div className="flex items-center gap-3 flex-1">
+            <div className="w-4 h-4 rounded-full bg-gradient-to-r from-blue-400/20 to-purple-400/20 border border-gray-300 backdrop-blur-sm" />
+            <span className="text-lg">✨</span>
+            <span className="text-gray-800">Glassy Effect</span>
+          </div>
+          {isGlassy && (
+            <span className="ml-auto text-blue-600 font-bold">✓</span>
+          )}
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
