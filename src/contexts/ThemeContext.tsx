@@ -81,27 +81,23 @@ const applyThemeToDocument = (theme: ColorTheme) => {
   const root = document.documentElement;
   const colors = themeColors[theme];
   
-  console.log(`Attempting to apply ${theme} theme...`);
-  console.log('Root element:', root);
-  console.log('Theme colors to apply:', colors);
+  console.log(`Applying ${theme} theme with enhanced method...`);
   
-  // Apply the theme colors to CSS variables
+  // Apply the theme colors to CSS variables with !important to override CSS file
   Object.entries(colors).forEach(([property, value]) => {
-    console.log(`Setting ${property} to ${value}`);
-    root.style.setProperty(property, value);
-    
-    // Verify the property was set
-    const actualValue = root.style.getPropertyValue(property);
-    console.log(`Verified ${property}: ${actualValue}`);
+    root.style.setProperty(property, value, 'important');
+    console.log(`Set ${property} to ${value} with !important`);
   });
   
-  // Force a repaint by adding and removing a class
-  root.classList.add('theme-updating');
-  setTimeout(() => {
-    root.classList.remove('theme-updating');
-  }, 0);
+  // Add a data attribute to help with CSS specificity
+  root.setAttribute('data-theme', theme);
   
-  console.log(`Successfully applied ${theme} theme`);
+  // Force repaint
+  root.style.display = 'none';
+  root.offsetHeight; // Trigger reflow
+  root.style.display = '';
+  
+  console.log(`Successfully applied ${theme} theme with enhanced method`);
 };
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
