@@ -21,9 +21,11 @@ const ThemeSwitcher: React.FC = () => {
   const { currentTheme, setTheme } = useTheme();
 
   const handleThemeChange = (themeId: ColorTheme) => {
-    console.log(`Theme switcher: changing to ${themeId}`);
+    console.log(`ThemeSwitcher: User clicked ${themeId}, current theme: ${currentTheme}`);
     setTheme(themeId);
   };
+
+  console.log(`ThemeSwitcher: Rendering with current theme: ${currentTheme}`);
 
   return (
     <DropdownMenu>
