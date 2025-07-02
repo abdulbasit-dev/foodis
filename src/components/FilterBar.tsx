@@ -55,13 +55,13 @@ const FilterBar: React.FC<FilterBarProps> = ({
     <div className="space-y-8 mb-10">
       {/* Search Bar */}
       <div className="relative max-w-md mx-auto">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-pink-400 h-5 w-5" />
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary h-5 w-5" />
         <Input
           type="text"
           placeholder="Search recipes or ingredients..."
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="pl-12 h-12 bg-white/90 backdrop-blur-sm border-2 border-pink-200 focus:border-pink-400 focus:ring-pink-400 rounded-full text-lg shadow-lg"
+          className="pl-12 h-12 bg-white/90 backdrop-blur-sm border-2 border-primary/30 focus:border-primary focus:ring-primary rounded-full text-lg shadow-lg"
         />
       </div>
 
@@ -89,7 +89,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
       <div className="flex flex-wrap gap-6 justify-center">
         {/* Difficulty Filter */}
         <div className="flex flex-wrap gap-2 items-center">
-          <span className="text-sm font-semibold text-pink-600 mr-3">Difficulty:</span>
+          <span className="text-sm font-semibold text-primary mr-3">Difficulty:</span>
           {difficulties.map((difficulty) => (
             <Badge
               key={difficulty.id}
@@ -97,7 +97,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
               className={`cursor-pointer transition-all duration-300 transform hover:scale-105 px-4 py-2 text-sm font-medium ${
                 selectedDifficulty === difficulty.id
                   ? 'lovable-button text-white border-0'
-                  : 'bg-white/80 border-2 border-pink-300 text-pink-600 hover:bg-pink-50'
+                  : 'bg-white/80 border-2 border-primary/40 text-primary hover:bg-primary/10'
               }`}
               onClick={() => onDifficultyChange(difficulty.id)}
             >
@@ -108,7 +108,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
 
         {/* Prep Time Filter */}
         <div className="flex flex-wrap gap-2 items-center">
-          <span className="text-sm font-semibold text-pink-600 mr-3">Prep Time:</span>
+          <span className="text-sm font-semibold text-primary mr-3">Prep Time:</span>
           {prepTimes.map((time) => (
             <Badge
               key={time.id}
@@ -116,7 +116,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
               className={`cursor-pointer transition-all duration-300 transform hover:scale-105 px-4 py-2 text-sm font-medium ${
                 selectedPrepTime === time.id
                   ? 'lovable-button text-white border-0'
-                  : 'bg-white/80 border-2 border-pink-300 text-pink-600 hover:bg-pink-50'
+                  : 'bg-white/80 border-2 border-primary/40 text-primary hover:bg-primary/10'
               }`}
               onClick={() => onPrepTimeChange(time.id)}
             >

@@ -125,12 +125,12 @@ All colors MUST be HSL.
   .lovable-button {
     background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary)) 50%, hsl(var(--primary)) 100%);
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(219, 39, 119, 0.3);
+    box-shadow: 0 4px 12px hsl(var(--primary) / 0.3);
   }
 
   .lovable-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(219, 39, 119, 0.4);
+    box-shadow: 0 8px 20px hsl(var(--primary) / 0.4);
   }
 
   .lovable-outline {
@@ -144,6 +144,6 @@ All colors MUST be HSL.
     background: hsl(var(--primary));
     color: white;
     transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(219, 39, 119, 0.25);
+    box-shadow: 0 6px 16px hsl(var(--primary) / 0.25);
   }
 }

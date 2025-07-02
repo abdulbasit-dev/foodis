@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
@@ -125,7 +124,7 @@ const Index = () => {
             </div>
             <Button 
               onClick={() => setIsAddRecipeModalOpen(true)}
-              className="recipe-gradient text-white hover:shadow-lg transition-all duration-200"
+              className="lovable-button text-white hover:shadow-lg transition-all duration-200"
             >
               <Plus className="h-4 w-4 mr-2" />
               Add Recipe
@@ -173,7 +172,7 @@ const Index = () => {
             </p>
             <Button 
               onClick={() => setIsAddRecipeModalOpen(true)}
-              className="recipe-gradient text-white"
+              className="lovable-button text-white"
             >
               <Plus className="h-4 w-4 mr-2" />
               Add Your First Recipe
