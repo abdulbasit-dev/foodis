@@ -40,11 +40,23 @@ export const recipeService = {
   // Add a new recipe
   async addRecipe(recipeData: Omit<Recipe, 'id'>): Promise<string> {
     try {
-      const docRef = await addDoc(collection(db, RECIPES_COLLECTION), {
+      // Clean the data to remove undefined values
+      const cleanData = {
         ...recipeData,
         dateAdded: new Date().toISOString().split('T')[0],
         createdAt: Timestamp.now()
+      };
+
+      // Remove undefined fields (Firebase doesn't accept them)
+      Object.keys(cleanData).forEach(key => {
+        if (cleanData[key as keyof typeof cleanData] === undefined) {
+          delete cleanData[key as keyof typeof cleanData];
+        }
       });
+
+      console.log('Adding recipe to Firebase:', cleanData);
+      
+      const docRef = await addDoc(collection(db, RECIPES_COLLECTION), cleanData);
       return docRef.id;
     } catch (error) {
       console.error('Error adding recipe:', error);
@@ -55,9 +67,19 @@ export const recipeService = {
   // Update an existing recipe
   async updateRecipe(id: string, recipeData: Partial<Recipe>): Promise<void> {
     try {
+      // Clean the data to remove undefined values
+      const cleanData = { ...recipeData };
+      Object.keys(cleanData).forEach(key => {
+        if (cleanData[key as keyof typeof cleanData] === undefined) {
+          delete cleanData[key as keyof typeof cleanData];
+        }
+      });
+
+      console.log('Updating recipe in Firebase:', id, cleanData);
+
       const recipeRef = doc(db, RECIPES_COLLECTION, id);
       await updateDoc(recipeRef, {
-        ...recipeData,
+        ...cleanData,
         updatedAt: Timestamp.now()
       });
     } catch (error) {
@@ -79,6 +101,8 @@ export const recipeService = {
   // Update last made date
   async updateLastMade(id: string, date: string): Promise<void> {
     try {
+      console.log('Updating lastMade date:', id, date);
+      
       const recipeRef = doc(db, RECIPES_COLLECTION, id);
       await updateDoc(recipeRef, {
         lastMade: date,
@@ -115,8 +139,18 @@ export const mealLogService = {
   // Add a new meal log
   async addMealLog(logData: Omit<MealLog, 'id'>): Promise<string> {
     try {
+      // Clean the data to remove undefined values
+      const cleanData = { ...logData };
+      Object.keys(cleanData).forEach(key => {
+        if (cleanData[key as keyof typeof cleanData] === undefined) {
+          delete cleanData[key as keyof typeof cleanData];
+        }
+      });
+
+      console.log('Adding meal log to Firebase:', cleanData);
+      
       const docRef = await addDoc(collection(db, MEAL_LOGS_COLLECTION), {
-        ...logData,
+        ...cleanData,
         createdAt: Timestamp.now()
       });
       return docRef.id;

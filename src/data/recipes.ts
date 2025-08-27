@@ -1,4 +1,4 @@
-
+// src/data/recipes.ts
 export interface Recipe {
   id: string;
   name: string;

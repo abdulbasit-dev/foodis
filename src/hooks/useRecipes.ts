@@ -38,6 +38,8 @@ export const useRecipes = () => {
   // Recipe operations
   const addRecipe = async (recipeData: Omit<Recipe, 'id' | 'dateAdded'>) => {
     try {
+      console.log('Adding recipe:', recipeData);
+      
       const id = await recipeService.addRecipe({
         ...recipeData,
         dateAdded: new Date().toISOString().split('T')[0]
@@ -49,10 +51,13 @@ export const useRecipes = () => {
         dateAdded: new Date().toISOString().split('T')[0]
       };
       
+      console.log('Recipe added successfully:', newRecipe);
+      
       setRecipes(prev => [newRecipe, ...prev]);
       toast.success(`${recipeData.name} has been added to your collection!`);
       return id;
     } catch (err) {
+      console.error('Failed to add recipe:', err);
       toast.error('Failed to add recipe');
       throw err;
     }
@@ -60,14 +65,18 @@ export const useRecipes = () => {
 
   const updateRecipe = async (id: string, recipeData: Partial<Recipe>) => {
     try {
+      console.log('Updating recipe:', id, recipeData);
+      
       await recipeService.updateRecipe(id, recipeData);
       
       setRecipes(prev => prev.map(recipe => 
         recipe.id === id ? { ...recipe, ...recipeData } : recipe
       ));
       
+      console.log('Recipe updated successfully');
       toast.success('Recipe has been updated!');
     } catch (err) {
+      console.error('Failed to update recipe:', err);
       toast.error('Failed to update recipe');
       throw err;
     }
